@@ -1,0 +1,9 @@
+# Local environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local tooling output
+node_modules/
+.vercel/
+supabase/.temp/

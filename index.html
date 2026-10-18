@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunny Chips — Banana Chips</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section class="auth-screen" id="auth-screen" aria-labelledby="auth-title">
+    <div class="auth-card">
+      <a class="logo" href="#">Sunny<span>Chips</span></a>
+      <p class="eyebrow">Wholesale snack orders</p>
+      <h1 id="auth-title">Welcome back</h1>
+      <p class="auth-intro">Sign in to browse products and place retailer orders.</p>
+      <form class="email-login-form">
+        <label>Email<input name="email" type="email" autocomplete="username" placeholder="you@example.com" required></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" minlength="8" required></label>
+        <button class="checkout-button" type="submit">Sign in</button>
+        <button class="auth-switch" type="button">Create retailer account</button>
+        <p class="auth-message" role="status"></p>
+      </form>
+      <form class="email-signup-form" hidden>
+        <label>Your name<input name="fullName" type="text" autocomplete="name" maxlength="100" required placeholder="Your full name"></label>
+        <label>Shop or business name<input name="businessName" type="text" autocomplete="organization" maxlength="120" required placeholder="Your shop name"></label>
+        <label>Phone number<input name="phone" type="tel" autocomplete="tel" inputmode="tel" minlength="7" maxlength="20" required placeholder="Phone number"></label>
+        <label>Delivery address<textarea name="deliveryAddress" autocomplete="street-address" required placeholder="Full delivery address"></textarea></label>
+        <label>Email<input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>Password<input name="password" type="password" autocomplete="new-password" minlength="8" required></label>
+        <button class="checkout-button" type="submit">Create account</button>
+        <button class="auth-switch" type="button">Already registered? Sign in</button>
+        <p class="auth-message" role="status"></p>
+      </form>
+      <div class="email-confirmation" hidden>
+        <p class="auth-message" role="status"></p>
+        <button class="auth-switch" type="button">Return to sign in</button>
+      </div>
+      <p class="auth-fineprint" hidden>Your contact and delivery details will be saved with your retailer account and used to prefill future orders.</p>
+    </div>
+  </section>
+  <header class="site-header">
+    <a class="logo" href="#">Sunny<span>Chips</span></a>
+    <nav>
+      <a href="#products">Our chips</a>
+      <a href="#about">Our story</a>
+    </nav>
+    <div class="header-actions"><span class="signed-in-identity"></span><a class="owner-dashboard-link" href="owner-dashboard.html" hidden>Owner dashboard</a><button class="signout-button" type="button">Sign out</button><button class="header-button cart-toggle" type="button" aria-label="Open basket">Basket <span class="cart-count">0</span></button></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">A little crunch. A lot of sunshine.</p>
+        <h1>Good days<br>start with<br><em>a little crunch.</em></h1>
+        <p class="hero-description">
+          Golden, crispy banana chips made for sharing, snacking,
+          and sneaking just one more.
+        </p>
+        <a class="primary-button" href="#products">Find your crunch <span>↓</span></a>
+        <p class="hero-note">Small-batch · Big crunch · Made with care</p>
+      </div>
+
+      <div class="hero-art" aria-label="Illustration of golden banana chips">
+        <div class="sun"></div>
+        <div class="chip chip-one"></div>
+        <div class="chip chip-two"></div>
+        <div class="chip chip-three"></div>
+        <div class="chip chip-four"></div>
+        <span class="art-label">CRUNCH<br>HAPPY</span>
+        <span class="art-caption">A sunny snack for any day</span>
+      </div>
+    </section>
+
+    <section class="products-section" id="products">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Meet your new favorites</p>
+          <h2>The chip <em>collection</em></h2>
+        </div>
+        <p>Pick a flavor. Follow your crunch.</p>
+      </div>
+
+      <div class="filters" aria-label="Filter products">
+        <button class="filter-button active" data-filter="all">All chips</button>
+        <button class="filter-button" data-filter="classic">Classic</button>
+        <button class="filter-button" data-filter="sweet">Sweet</button>
+        <button class="filter-button" data-filter="savory">Savory</button>
+      </div>
+
+      <div class="product-grid" aria-live="polite"></div>
+
+      <details class="product-manager">
+        <summary>Manage products and prices</summary>
+        <p class="manager-help">Store owner: sign in to add products and update prices. Changes are shared with everyone visiting the published shop.</p>
+        <div class="admin-controls" hidden>
+          <button class="admin-signout manager-button" type="button">Sign out</button>
+          <form class="product-form">
+          <input name="id" type="hidden">
+          <label>Product name<input name="name" required maxlength="50" placeholder="e.g. Spicy Banana Chips"></label>
+          <label>Description<input name="description" required maxlength="70" placeholder="e.g. Hot &amp; tangy · 150 g"></label>
+          <label>Category<select name="category"><option value="classic">Classic</option><option value="sweet">Sweet</option><option value="savory">Savory</option></select></label>
+          <label>Price (₹)<input name="price" type="number" required min="1" max="100000" step="1" placeholder="149"></label>
+          <label>Product emoji<input name="emoji" required maxlength="8" value="🍌" placeholder="🍌"></label>
+          <label class="active-label"><input name="active" type="checkbox" checked> Show in shop</label>
+          <div class="product-form-actions"><button class="checkout-button" type="submit">Save product</button><button class="cancel-edit" type="button" hidden>Cancel edit</button></div>
+          </form>
+          <div class="managed-products" aria-live="polite"></div>
+          <section class="orders-section">
+            <h3>Retailer orders</h3>
+            <button class="manager-button refresh-orders" type="button">Refresh orders</button>
+            <div class="order-list" aria-live="polite"></div>
+          </section>
+        </div>
+      </details>
+    </section>
+
+    <section class="about-section" id="about">
+      <p class="eyebrow">A little more about us</p>
+      <h2>Made for the<br><em>snack in between.</em></h2>
+      <p>SunnyChips is a cheerful little idea: make banana chips that bring people together, one golden, crispy bite at a time.</p>
+    </section>
+  </main>
+
+  <div class="cart-backdrop" hidden></div>
+  <aside class="cart-panel" aria-label="Shopping basket" aria-hidden="true">
+    <div class="cart-heading"><div><p class="eyebrow">Your picks</p><h2>Your basket</h2></div><button class="cart-close" type="button" aria-label="Close basket">×</button></div>
+    <div class="cart-items"></div>
+    <div class="cart-empty">Your basket is looking a little empty. Add a bag of crunch!</div>
+    <div class="cart-summary"><span>Subtotal</span><strong class="cart-total">₹0</strong></div>
+    <form class="checkout-form">
+      <label>Your name<input name="name" autocomplete="name" required placeholder="Name"></label>
+      <label>Retailer / business name<input name="businessName" required placeholder="Business name"></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+      <label>Phone<input name="phone" type="tel" autocomplete="tel" required placeholder="Phone number"></label>
+      <label>Delivery address<textarea name="address" autocomplete="street-address" required placeholder="Full delivery address"></textarea></label>
+      <label class="honeypot" aria-hidden="true">Leave this field empty<input name="website" tabindex="-1" autocomplete="off"></label>
+      <button class="checkout-button" type="submit">Send retailer order request</button>
+      <p class="checkout-note">This is an order request. The shop will confirm availability, delivery charges, and payment with you.</p>
+      <p class="order-message" role="status"></p>
+    </form>
+  </aside>
+
+  <footer>
+    <a class="logo" href="#">Sunny<span>Chips</span></a>
+    <p>Good things come in crunchy packages.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

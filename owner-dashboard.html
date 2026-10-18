@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fffaf0">
+  <title>Owner dashboard — Sunny Chips</title>
+  <link rel="stylesheet" href="owner-dashboard.css">
+</head>
+<body>
+  <header class="owner-header">
+    <a class="brand" href="index.html" aria-label="Sunny Chips shop home">Sunny<span>Chips</span></a>
+    <a class="back-link" href="index.html">← Back to shop</a>
+  </header>
+
+  <main class="owner-main">
+    <section class="login-panel panel" id="owner-login-panel" aria-labelledby="login-title">
+      <p class="eyebrow">Private store controls</p>
+      <h1 id="login-title">Owner dashboard</h1>
+      <p class="muted">Sign in with the email account that was granted owner access in Supabase.</p>
+      <form id="owner-login-form" class="owner-login-form">
+        <label>Email address<input name="email" type="email" autocomplete="username" required placeholder="you@example.com"></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+        <button class="primary-button" type="submit">Sign in to dashboard</button>
+        <p class="message" id="owner-login-message" role="status" aria-live="polite"></p>
+      </form>
+      <button class="text-button" id="switch-account" type="button" hidden>Sign out and use a different account</button>
+      <p class="login-help">Retailer accounts do not have owner permissions. If this is your first time, add your account to <code>public.store_admins</code> using the setup instructions.</p>
+    </section>
+
+    <section class="dashboard-panel" id="owner-dashboard-panel" hidden>
+      <div class="dashboard-topline">
+        <div>
+          <p class="eyebrow">Store controls</p>
+          <h1>Owner dashboard</h1>
+          <p class="muted">Signed in as <strong id="owner-identity"></strong></p>
+        </div>
+        <div class="top-actions">
+          <a class="secondary-button" href="index.html">View shop</a>
+          <button class="secondary-button" id="refresh-dashboard" type="button">Refresh</button>
+          <button class="text-button" id="owner-signout" type="button">Sign out</button>
+        </div>
+      </div>
+      <p class="dashboard-message" id="dashboard-message" role="status" aria-live="polite"></p>
+
+      <section class="stat-grid" aria-label="Store summary">
+        <article class="stat-card"><span>Products</span><strong id="stat-products">—</strong></article>
+        <article class="stat-card"><span>Shown in shop</span><strong id="stat-active">—</strong></article>
+        <article class="stat-card"><span>Orders to review</span><strong id="stat-new-orders">—</strong></article>
+        <article class="stat-card"><span>Total orders</span><strong id="stat-orders">—</strong></article>
+      </section>
+
+      <div class="dashboard-grid">
+        <section class="panel products-panel" aria-labelledby="products-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">Catalog</p><h2 id="products-title">Products and pricing</h2></div>
+          </div>
+          <form id="product-form" class="product-form">
+            <input name="id" type="hidden">
+            <div class="form-title-row"><h3 id="product-form-title">Add a product</h3><span>All prices are in Indian rupees (₹)</span></div>
+            <label>Product name<input name="name" required maxlength="80" placeholder="e.g. Spicy Banana Chips"></label>
+            <label>Description<input name="description" required maxlength="160" placeholder="Flavor, size, or pack details"></label>
+            <div class="form-row">
+              <label>Category<select name="category" required><option value="classic">Classic</option><option value="sweet">Sweet</option><option value="savory">Savory</option></select></label>
+              <label>Price (₹)<input name="price" type="number" required min="1" max="100000" step="1" placeholder="149"></label>
+              <label>Emoji<input name="emoji" maxlength="8" value="🍌" placeholder="🍌"></label>
+            </div>
+            <label class="checkbox-label"><input name="active" type="checkbox" checked> Show this product in the shop</label>
+            <div class="form-actions"><button class="primary-button" id="save-product" type="submit">Add product</button><button class="secondary-button" id="cancel-product-edit" type="button" hidden>Cancel edit</button></div>
+            <p class="message" id="product-message" role="status" aria-live="polite"></p>
+          </form>
+          <div class="product-list-heading"><h3>Current products</h3><span id="product-count-label"></span></div>
+          <div class="product-list" id="product-list" aria-live="polite"><p class="muted">Loading products…</p></div>
+        </section>
+
+        <section class="panel orders-panel" aria-labelledby="orders-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">Retailer requests</p><h2 id="orders-title">Orders</h2></div>
+          </div>
+          <div class="order-list" id="order-list" aria-live="polite"><p class="muted">Loading orders…</p></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="owner-dashboard.js"></script>
+</body>
+</html>
